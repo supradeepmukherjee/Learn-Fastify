@@ -1,7 +1,7 @@
 import fp from 'fastify-plugin'
 import fastifyJwt from '@fastify/jwt'
 
-const jwt = fp(async (fastify, o) => {
+const jwt = fp(async fastify => {
     fastify.register(fastifyJwt, { secret: process.env.JWT_SECRET })
     fastify.decorate('authenticate', async (req, res) => {
         try {

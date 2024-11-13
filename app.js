@@ -2,9 +2,13 @@ import Fastify from "fastify"
 import { configDotenv } from "dotenv"
 import cors from "@fastify/cors"
 import fastifySensible from "@fastify/sensible"
+import fastifyMultipart from "@fastify/multipart"
+import fastifyStatic from "@fastify/static"
 import mongo from "./plugins/mongo.js"
 import jwt from "./plugins/jwt.js"
 import auth from './routes/auth.js'
+import thumbnail from './routes/thumbnail.js'
+import path from 'path'
 
 configDotenv()
 
@@ -14,8 +18,14 @@ fastify.register(cors)
 fastify.register(fastifySensible)
 fastify.register(mongo)
 fastify.register(jwt)
+fastify.register(fastifyMultipart)
+fastify.register(fastifyStatic, {
+    root: path.join(__dirname, 'uploads'),
+    prefix: '/uploads/'
+})
 
 fastify.register(auth, { prefix: '/api/auth' })
+fastify.register(thumbnail, { prefix: '/api/thumbnail' })
 
 fastify.get('/', async (req, res) => {
     try {

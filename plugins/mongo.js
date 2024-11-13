@@ -1,7 +1,7 @@
 import fastifyPlugin from "fastify-plugin"
 import mongoose from "mongoose"
 
-export default fastifyPlugin(async (fastify, o) => {
+export default fastifyPlugin(async fastify => {
     try {
         await mongoose.connect(process.env.MONGO_URI)
         fastify.decorate('mongoose', mongoose)

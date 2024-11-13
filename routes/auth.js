@@ -1,6 +1,6 @@
 import { forgotPassword, login, logout, register, resetPassword } from '../controllers/auth.js'
 
-const app = async (fastify, o) => {
+const app = async fastify => {
     fastify.post('/register', register)
     fastify.post('/login', login)
     fastify.put('/forgot-password', forgotPassword)
