@@ -3,6 +3,8 @@ import { configDotenv } from "dotenv"
 import cors from "@fastify/cors"
 import fastifySensible from "@fastify/sensible"
 import mongo from "./plugins/mongo.js"
+import jwt from "./plugins/jwt.js"
+import auth from './routes/auth.js'
 
 configDotenv()
 
@@ -11,6 +13,9 @@ const fastify = Fastify({ logger: true })
 fastify.register(cors)
 fastify.register(fastifySensible)
 fastify.register(mongo)
+fastify.register(jwt)
+
+fastify.register(auth, { prefix: '/api/auth' })
 
 fastify.get('/', async (req, res) => {
     try {
