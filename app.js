@@ -9,8 +9,12 @@ import jwt from "./plugins/jwt.js"
 import auth from './routes/auth.js'
 import thumbnail from './routes/thumbnail.js'
 import path from 'path'
+import { fileURLToPath } from 'url'
 
 configDotenv()
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const fastify = Fastify({ logger: true })
 
